@@ -1,32 +1,137 @@
 <!DOCTYPE html>
-<html lang="en">
-
-
-
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>I like boobs</title>
+    <title>Snake Game</title>
+    <style>
+        #game-board {
+            width: 300px;
+            height: 300px;
+            border: 1px solid #000;
+            position: relative;
+        }
+
+        .snake {
+            width: 20px;
+            height: 20px;
+            background-color: green;
+            position: absolute;
+        }
+
+        .food {
+            width: 20px;
+            height: 20px;
+            background-color: red;
+            position: absolute;
+        }
+    </style>
 </head>
-
-
-
 <body>
-    <header>
-        <h1>Free Boobs</h1>
+    <h1>Snake Game</h1>
+    <div id="game-board"></div>
 
-     <button id="toggleButton" onclick="popButton ()">Click 4 Boobs</button>
-     <p id="displayText" style="display: none;">cosa stavi provando a vedere 🤨</p>
-    
-     <script src="script.js"></script>
-     <script src="pop-up.js"></script>
+    <script>
+        const gameBoard = document.getElementById("game-board");
+        const gridSize = 15;
+        const cellSize = gameBoard.offsetWidth / gridSize;
+        let snake = [{ x: 5, y: 5 }];
+        let food = generateFoodPosition();
+        let direction = "right";
+        let isGameRunning = true;
 
-    </header>
-</body>
+        function generateFoodPosition() {
+            const x = Math.floor(Math.random() * gridSize);
+            const y = Math.floor(Math.random() * gridSize);
+            return { x, y };
+        }
 
-<footer>
-        <p>&copy; 2023 I <3 Boobs</p>
-    </footer>
+        function update() {
+            if (!isGameRunning) return;
 
+            // Move the snake
+            const head = Object.assign({}, snake[0]);
+            switch (direction) {
+                case "up":
+                    head.y -= 1;
+                    break;
+                case "down":
+                    head.y += 1;
+                    break;
+                case "left":
+                    head.x -= 1;
+                    break;
+                case "right":
+                    head.x += 1;
+                    break;
+            }
+
+            // Check for collision with food
+            if (head.x === food.x && head.y === food.y) {
+                snake.unshift(food);
+                food = generateFoodPosition();
+            } else {
+                snake.pop();
+                snake.unshift(head);
+            }
+
+            // Check for collision with walls
+            if (
+                head.x < 0 ||
+                head.y < 0 ||
+                head.x >= gridSize ||
+                head.y >= gridSize
+            ) {
+                isGameRunning = false;
+                alert("Game Over!");
+                return;
+            }
+
+            // Check for collision with self
+            for (let i = 1; i < snake.length; i++) {
+                if (head.x === snake[i].x && head.y === snake[i].y) {
+                    isGameRunning = false;
+                    alert("Game Over!");
+                    return;
+                }
+            }
+
+            // Render the game board
+            gameBoard.innerHTML = "";
+            snake.forEach((segment) => {
+                const snakeSegment = document.createElement("div");
+                snakeSegment.className = "snake";
+                snakeSegment.style.left = segment.x * cellSize + "px";
+                snakeSegment.style.top = segment.y * cellSize + "px";
+                gameBoard.appendChild(snakeSegment);
+            });
+
+            const foodElement = document.createElement("div");
+            foodElement.className = "food";
+            foodElement.style.left = food.x * cellSize + "px";
+            foodElement.style.top = food.y * cellSize + "px";
+            gameBoard.appendChild(foodElement);
+
+            // Continue the game loop
+            setTimeout(update, 100);
+        }
+
+        document.addEventListener("keydown", (event) => {
+            switch (event.key) {
+                case "ArrowUp":
+                    if (direction !== "down") direction = "up";
+                    break;
+                case "ArrowDown":
+                    if (direction !== "up") direction = "down";
+                    break;
+                case "ArrowLeft":
+                    if (direction !== "right") direction = "left";
+                    break;
+                case "ArrowRight":
+                    if (direction !== "left") direction = "right";
+                    break;
+            }
+        });
+
+        update();
+    </script>
 </body>
 </html>
