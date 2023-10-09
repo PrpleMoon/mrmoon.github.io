@@ -1,0 +1,24 @@
+# Site settings
+title: Your Website Title
+description: Your website description
+baseurl: "" # Change this if your site is hosted in a subdirectory (e.g., "/blog")
+
+# Build settings
+theme: minima # You can change the theme to your preferred Jekyll theme
+markdown: kramdown
+exclude: [vendor]
+gems:
+  - jekyll-feed
+  - jekyll-sitemap
+
+# GitHub Pages settings
+remote_theme: jekyll/minima # You can change the theme here as well
+branch: main # Change to the name of your main branch (e.g., "main" or "master")
+
+# Plugins
+plugins:
+  - jekyll-feed
+  - jekyll-sitemap
+
+# Customize your URLs (optional)
+permalink: pretty
