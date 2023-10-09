@@ -4,8 +4,8 @@
     <title>Snake Game</title>
     <style>
         #game-board {
-            width: 300px;
-            height: 300px;
+            width: 1200px;
+            height: 1200px;
             border: 1px solid #000;
             position: relative;
         }
@@ -36,7 +36,7 @@
         let snake = [{ x: 5, y: 5 }];
         let food = generateFoodPosition();
         let direction = "right";
-        let isGameRunning = true;
+        let isGameRunning = false;
 
         function generateFoodPosition() {
             const x = Math.floor(Math.random() * gridSize);
@@ -111,7 +111,7 @@
             gameBoard.appendChild(foodElement);
 
             // Continue the game loop
-            setTimeout(update, 100);
+            setTimeout(update, 200);
         }
 
         document.addEventListener("keydown", (event) => {
