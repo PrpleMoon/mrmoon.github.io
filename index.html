@@ -36,7 +36,7 @@
         let snake = [{ x: 5, y: 5 }];
         let food = generateFoodPosition();
         let direction = "right";
-        let isGameRunning = false; // Initially set to false
+        let isGameRunning = true;
 
         function generateFoodPosition() {
             const x = Math.floor(Math.random() * gridSize);
@@ -47,37 +47,91 @@
         function update() {
             if (!isGameRunning) return;
 
-            // Rest of your game update logic...
+            // Move the snake
+            const head = Object.assign({}, snake[0]);
+            switch (direction) {
+                case "up":
+                    head.y -= 1;
+                    break;
+                case "down":
+                    head.y += 1;
+                    break;
+                case "left":
+                    head.x -= 1;
+                    break;
+                case "right":
+                    head.x += 1;
+                    break;
+            }
 
+            // Check for collision with food
+            if (head.x === food.x && head.y === food.y) {
+                snake.unshift(food);
+                food = generateFoodPosition();
+            } else {
+                snake.pop();
+                snake.unshift(head);
+            }
+
+            // Check for collision with walls
+            if (
+                head.x < 0 ||
+                head.y < 0 ||
+                head.x >= gridSize ||
+                head.y >= gridSize
+            ) {
+                isGameRunning = false;
+                alert("Game Over!");
+                return;
+            }
+
+            // Check for collision with self
+            for (let i = 1; i < snake.length; i++) {
+                if (head.x === snake[i].x && head.y === snake[i].y) {
+                    isGameRunning = false;
+                    alert("Game Over!");
+                    return;
+                }
+            }
+
+            // Render the game board
+            gameBoard.innerHTML = "";
+            snake.forEach((segment) => {
+                const snakeSegment = document.createElement("div");
+                snakeSegment.className = "snake";
+                snakeSegment.style.left = segment.x * cellSize + "px";
+                snakeSegment.style.top = segment.y * cellSize + "px";
+                gameBoard.appendChild(snakeSegment);
+            });
+
+            const foodElement = document.createElement("div");
+            foodElement.className = "food";
+            foodElement.style.left = food.x * cellSize + "px";
+            foodElement.style.top = food.y * cellSize + "px";
+            gameBoard.appendChild(foodElement);
+
+            // Continue the game loop
             setTimeout(update, 200);
         }
 
         document.addEventListener("keydown", (event) => {
-            if (event.key === " ") { // Check for spacebar press
-                if (!isGameRunning) {
-                    isGameRunning = true; // Start the game on spacebar press
-                    update(); // Begin the game loop
-                }
-            } else {
-                // Handle arrow key input if the game is running
-                if (isGameRunning) {
-                    switch (event.key) {
-                        case "ArrowUp":
-                            if (direction !== "down") direction = "up";
-                            break;
-                        case "ArrowDown":
-                            if (direction !== "up") direction = "down";
-                            break;
-                        case "ArrowLeft":
-                            if (direction !== "right") direction = "left";
-                            break;
-                        case "ArrowRight":
-                            if (direction !== "left") direction = "right";
-                            break;
-                    }
-                }
+            switch (event.key) {
+                case "ArrowUp":
+                    if (direction !== "down") direction = "up";
+                    break;
+                case "ArrowDown":
+                    if (direction !== "up") direction = "down";
+                    break;
+                case "ArrowLeft":
+                    if (direction !== "right") direction = "left";
+                    break;
+                case "ArrowRight":
+                    if (direction !== "left") direction = "right";
+                    break;
             }
         });
+
+        update();
     </script>
 </body>
 </html>
