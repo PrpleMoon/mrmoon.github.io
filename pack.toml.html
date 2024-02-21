@@ -1,28 +1,24 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>pack.toml</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GitHub Raw File Viewer</title>
 </head>
 <body>
-    <pre id="rawText"></pre>
 
-    <script>
-        // GitHub raw file URL
-        var githubRawUrl = 'https://raw.githubusercontent.com/PrpleMoon/Purples-Pack/main/Packwiz/pack.toml';
+<div id="content">
+    <!-- The fetched content will be placed here -->
+</div>
 
-        // Fetch the raw text from GitHub
-        fetch(githubRawUrl)
-            .then(response => response.text())
-            .then(data => {
-                // Display the raw text on the page
-                document.getElementById('rawText').innerText = data;
-            })
-            .catch(error => {
-                console.error('Error fetching raw text:', error);
-                document.getElementById('rawText').innerText = 'Error fetching raw text.';
-            });
-    </script>
+<script src="githubRawFetcher.js"></script>
+<script>
+// URL of the raw text file on GitHub
+var githubRawUrl = 'https://raw.githubusercontent.com/PrpleMoon/Purples-Pack/main/Packwiz/pack.toml';
+
+// Call the function to fetch the GitHub raw file
+fetchGithubRawFile(githubRawUrl, 'content');
+</script>
+
 </body>
 </html>
