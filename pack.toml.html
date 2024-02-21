@@ -1,24 +1,16 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>GitHub Raw File Viewer</title>
-</head>
-<body>
+name = "Purple's Pack"
+author = "PrpleMoon"
+version = "1.0.1"
+pack-format = "packwiz:1.1.0"
 
-<div id="content">
-    <!-- The fetched content will be placed here -->
-</div>
+[index]
+file = "index.toml"
+hash-format = "sha256"
+hash = "cf6afb3dbf342db8db672ba9284a3ca4d7095b41e23c30434ad5b378b817b21a"
 
-<script src="githubRawFetcher.js"></script>
-<script>
-// URL of the raw text file on GitHub
-var githubRawUrl = 'https://raw.githubusercontent.com/PrpleMoon/Purples-Pack/main/Packwiz/pack.toml';
+[versions]
+fabric = "0.14.24"
+minecraft = "1.20.1"
 
-// Call the function to fetch the GitHub raw file
-fetchGithubRawFile(githubRawUrl, 'content');
-</script>
-
-</body>
-</html>
+[options]
+acceptable-game-versions = ["1.20", "1.20.1"]
