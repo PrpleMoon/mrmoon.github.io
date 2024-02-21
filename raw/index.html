@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Raw Text Viewer</title>
+</head>
+<body>
+    <pre id="rawText"></pre>
+
+    <script>
+        // GitHub raw file URL
+        var githubRawUrl = 'https://raw.githubusercontent.com/PrpleMoon/Purples-Pack/main/Packwiz/pack.toml';
+
+        // Fetch the raw text from GitHub
+        fetch(githubRawUrl)
+            .then(response => response.text())
+            .then(data => {
+                // Display the raw text on the page
+                document.getElementById('rawText').innerText = data;
+            })
+            .catch(error => {
+                console.error('Error fetching raw text:', error);
+                document.getElementById('rawText').innerText = 'Error fetching raw text.';
+            });
+    </script>
+</body>
+</html>
