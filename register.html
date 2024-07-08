@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register</title>
+    <link rel="stylesheet" href="CSS/main.css">
+    <link rel="stylesheet" href="CSS/login.css">
+    <script src="login.js"></script>
+    <link href="https://fonts.cdnfonts.com/css/planet-n" rel="stylesheet">
+    <link href="https://fonts.cdnfonts.com/css/superhelio" rel="stylesheet">
+    <link href="https://fonts.cdnfonts.com/css/depixel" rel="stylesheet">
+    <script type="module" src="firebase.js"></script>
+</head>
+<body>
+    <header>
+        <a href="index.html">
+            <h1>MEET.GG</h1>
+        </a>
+    </header>
+
+    <div class="wrapper">
+        <div class="form-box login">
+            <h2>Sign up</h2>
+            <form id="signUpForm">
+                <div id="signUpMessage" class="messageDiv" style="display:none"></div>
+                <div class="input-box">
+                    <span class="icon"></span>
+                    <input type="email" required id="Email">
+                    <label>Email</label>
+                </div>
+                <div class="input-box">
+                    <span class="icon"></span>
+                    <input type="password" required id="Password">
+                    <label>Password</label>
+                </div>
+                <div class="input-box">
+                    <span class="icon"></span>
+                    <input type="text" required id="Username">
+                    <label>Username</label>
+                </div>
+                <div class="button">
+                    <button class="btn" id="submitSignUp">Register</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <footer>
+        <p>&copy; 2024 Thomas Hickson</p>
+    </footer>
+<script type="module" src="firebase.js"></script>
+</body>
+</html>

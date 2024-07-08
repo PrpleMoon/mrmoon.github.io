@@ -1,0 +1,10 @@
+.messageDive{
+    background-color: #1A1B27;
+    color : #4BE4B8;
+    padding: 10px 20px;
+    margin: 10px;
+    border-radius: 5px;
+    font-family: "superhelio _extended_ultra", sans-serif;
+    opacity: 0;
+    animation: fadeOut 7s forwards;
+}
